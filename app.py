@@ -1,4 +1,3 @@
-# zain
 import streamlit as st
 import os
 from PyPDF2 import PdfReader
