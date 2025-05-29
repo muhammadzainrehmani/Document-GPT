@@ -152,9 +152,21 @@ def get_vectorstore(text_chunks, COLLECTION_NAME):
 
 def get_qa_chain(vectorstore,num_chunks):
     prompt_template = """
-    You are trained to extract Answer from the given Context and Question. Then, Detail the Answer in 200 words. If the Answer is not found in the Context, then return "N/A", otherwise return the detail Answer.
-    Context: {context}
-    Question: {question}"""
+You are an intelligent assistant trained to extract and elaborate answers based on the provided context and question.
+
+Instructions:
+- If the answer is explicitly or implicitly available in the context, provide a detailed explanation (around 200 words).
+- If the answer cannot be found or reasonably inferred from the context, respond only with: "N/A".
+
+Context:
+{context}
+
+Question:
+{question}
+
+Answer:
+"""
+
     mprompt_url = PromptTemplate(
         template=prompt_template, input_variables=["context", "question"], validate_template=False)
     chain_type_kwargs = {"prompt": mprompt_url}
