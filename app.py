@@ -76,7 +76,7 @@ def main():
         vectorestore = get_vectorstore(text_chunks_list, collection_name)
         st.write("Vectore Store Created...")
         # create qa chain
-        num_chunks = 4
+        num_chunks = 6
         st.session_state.conversation = get_qa_chain(vectorestore,num_chunks) #for openAI
 
         st.session_state.processComplete = True
@@ -176,7 +176,7 @@ Answer:
     #                             retriever=vectorstore.as_retriever(search_type="similarity",
     #                                                         search_kwargs={"k": num_chunks}), chain_type_kwargs=chain_type_kwargs, return_source_documents=True)
     qa = RetrievalQA.from_chain_type(llm = ChatGoogleGenerativeAI(
-    model="gemini-1.5-flash", temperature=1, max_tokens=600, api_key=genai_api_key, request_options=retry_policy), chain_type="stuff",
+    model="gemini-2.0-flash", temperature=1, max_tokens=200, api_key=genai_api_key, request_options=retry_policy), chain_type="stuff",
                                 retriever=vectorstore.as_retriever(search_type="similarity",
                                                             search_kwargs={"k": num_chunks}), chain_type_kwargs=chain_type_kwargs, return_source_documents=True)
     return qa
